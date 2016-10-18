@@ -12,8 +12,8 @@ public class Email {
 
 
 
-    public static void sendEmail(Map<String, String> contents, String[] recipients) throws MessagingException {
-        String subject = "Driver Verification";
+    public static void sendEmail(Map<String, String> contents, String subject, String[] recipients) throws MessagingException {
+        subject = "Driver Verification";
         String msg ="<table>";
         Iterator iterator = contents.entrySet().iterator();
         while(iterator.hasNext()) {

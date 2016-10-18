@@ -15,6 +15,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
 
+import static com.ecarride.App.generateDriverEmailContent;
+
 
 /**
  * Simple standalone JPA app.
@@ -31,12 +33,11 @@ public class App {
 	public static String fhvActiveAPI = "https://data.cityofnewyork.us/resource/p8xb-39i5.json";
 	public static String streetHailLiveryAPI = "https://data.cityofnewyork.us/resource/n9g6-5xfa.json";
 	public static String fhvVehicleAPI = "https://data.cityofnewyork.us/resource/k5sk-y8y9.json";
-	public static int fhvDriverActiveNum = 0, fhvShlActiveNum = 0, fhvVehichleActiveNum = 0, baseChangedNum = 0;
+	public static int fhvDriverActiveNum = 0, fhvShlActiveNum = 0, fhvVehichleActiveNum = 0, baseChangedNum = 0, inTroubleNum = 0;
 	public static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
 	public static EntityManager entityManager = entityManagerFactory.createEntityManager();
 	public static final String[] ADMIN_RECIPIENTS = {"han@cacsnyc.com"};
-	public static  List<String> DriverRecipientsList = new ArrayList<>();
-	public static  String[] DriverRecipients;
+	public static  String[] driverRecipients;
 
 	public static void main(String[] args) throws IOException, JSONException, MessagingException {
 		getDrivers();
@@ -45,12 +46,8 @@ public class App {
 		checkDriver(fhvVehicleAPI);
 		Map<String, String> adminEmailContent = generateAdminEmailContent(tlcDrivers);
 //		Map<String, String> driverEmailContent = generateDriverEmailContent(tlcDrivers);
-		Email.sendEmail(adminEmailContent, ADMIN_RECIPIENTS);
-//		Email.sendEmail(contents, ADMIN_RECIPIENTS);
-//		ResetDriverWorkStatus();
-
-
-
+		Email.sendEmail(adminEmailContent, "Driver Verification", ADMIN_RECIPIENTS);
+		generateDriverEmailContent(tlcDrivers);
 	}
 	public static void ResetDriverWorkStatus() {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
@@ -63,25 +60,43 @@ public class App {
 			Query query = entityManager
 					.createQuery("UPDATE Driver d SET d.baseApproved = 0, d.status = 0"
 							+ "WHERE d.id= :id");
-			query.setParameter("id", temp.getDriverId());
+			query.setParameter("id", temp.getDriver().getId());
 			query.executeUpdate();
 			updateTransaction.commit();
 		}
 	}
 
-	public static Map<String, String> generateDriverEmailContent(Set<TlcDriver> tlcDrivers) {
+	public static void generateDriverEmailContent(Set<TlcDriver> tlcDrivers) throws MessagingException {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		Map<String, String> result = new LinkedHashMap<>();
-		String driverAlart = "";
+		String driverAlert = "";
 		while(iterator.hasNext()) {
 			TlcDriver tlcDriver = iterator.next();
-			if(!tlcDriver.isActiveInvehiclesFhv() || !tlcDriver.isActiveInStreetHailLivery() || !tlcDriver.isActiveInFhvDrivers() || tlcDriver.isBaseChanged()) {
-				tlcDriver.setInTrouble(true);
-//				System.out.println(tlcDriver.getFirstname() + " in trouble? : " + tlcDriver.isInTrouble() + " T1: " + tlcDriver.isActiveInFhvDrivers() + " T2: " + tlcDriver.isActiveInStreetHailLivery() + " T3: " + tlcDriver.isActiveInvehiclesFhv() + " T3-2: " + tlcDriver.isBaseChanged());
-
+			if(tlcDriver.isInTrouble()) {
+				inTroubleNum++;
+				driverAlert += "<b>Because your driver or vehicle status has changed, you work has been suspend. <br>" +
+						"Please contact your base. <br><br> </b>  Your info: <br>";
+				driverAlert += "Name: " + tlcDriver.getDriver().getFirstName() + " " + tlcDriver.getDriver().getLastName() + " <br>" +
+						"TLC_FHV_License_Number: " + tlcDriver.getDriver().getDriverTlcFhvLicenseNum() + "  <br>" +
+						"TLC_FHV_Vehicle_License_Number: " + tlcDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "<br> <br>";
+				driverAlert += "Reason: <br>";
+				if(!tlcDriver.isActiveInFhvDrivers()) {
+					driverAlert += "You are not a <b> For-Hire Vehicles FHV Active Driver</b> <br>";
+				}
+				if(!tlcDriver.isActiveInStreetHailLivery()) {
+					driverAlert += "You are not a <b> Street-Hail-Livery Active Driver</b> <br>";
+				}
+				if(!tlcDriver.isActiveInvehiclesFhv()) {
+					driverAlert += "Your vehicle is not  <b> For-Hire Vehicles FHV Active</b> <br>";
+				}
+				if(tlcDriver.isBaseChanged()) {
+					driverAlert += "You are no longer a driver in our base<br>";
+				}
 			}
 		}
-		return null;
+		driverRecipients = new String[inTroubleNum];
+		result.put("Driver_Alert", driverAlert);
+		Email.sendEmail(result, "Driver Status Alert",new String[]{"han@cacsnyc.com"});
 	}
 
 	public static Map<String, String> generateAdminEmailContent(Set<TlcDriver> tlcDrivers) {
@@ -94,28 +109,28 @@ public class App {
 		while(iterator.hasNext()) {
 			TlcDriver driver = iterator.next();
 			if(!driver.isActiveInFhvDrivers()) {
-				FhvDriverActiveResult += "<tr><td><b>Name: </b>" + driver.getFirstname() + " " + driver.getLastname() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriverTlcLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				FhvDriverActiveResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
 
 			}
 
 			if(!driver.isActiveInStreetHailLivery()) {
-				ShlActiveResult += "<tr><td><b>Name: </b>" + driver.getFirstname() + " " + driver.getLastname() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriverTlcLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				ShlActiveResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
 			}
 			if(!driver.isActiveInvehiclesFhv()) {
-				FhvVehicleResult += "<tr><td><b>Name: </b>" + driver.getFirstname() + " " + driver.getLastname() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriverTlcLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				FhvVehicleResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
 			}
 			if(driver.isBaseChanged()) {
-				BaseChangedResult += "<tr><td><b>Name: </b>" + driver.getFirstname() + " " + driver.getLastname() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriverTlcLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				BaseChangedResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
 			}
 		}
-		result.put("DriverFhvActive", FhvDriverActiveResult);
-		result.put("DriverShlActive", ShlActiveResult);
-		result.put("VehicleActive", FhvVehicleResult);
-		result.put("BaseChanged", BaseChangedResult);
+		result.put("Admin_FhvDriver", FhvDriverActiveResult);
+		result.put("Admin_Shl", ShlActiveResult);
+		result.put("Admin_FhvVehicle", FhvVehicleResult);
+		result.put("Admin_BaseChanged", BaseChangedResult);
 
 		return result;
 	}
@@ -136,7 +151,7 @@ public class App {
 					tempDriver.setActiveInvehiclesFhv(true);
 					fhvVehichleActiveNum++;
 				}
-				if(!jsonObj.getString("base_number").substring(jsonObj.getString("base_number").length() - 4).equals(tempDriver.getBaseTlcLicenseNum())) {
+				if(!jsonObj.getString("base_number").substring(jsonObj.getString("base_number").length() - 4).equals(String.valueOf(tempDriver.getTaxiBase().getTlcLicenseNum()))) {
 					tempDriver.setBaseChanged(true);
 					baseChangedNum++;
 				}
@@ -183,22 +198,6 @@ public class App {
 	}
 
 	public static void getDrivers() {
-
-//		TypedQuery<Object[]> query = entityManager.createQuery(
-//				"SELECT d.driverTlcFhvLicenseNum, d.firstName, d.lastName, v.vehicleTlcFhvLicenseNum, b.tlcLicenseNum, d.id, d.baseApproved, d.status FROM Driver AS d, TaxiVehicle AS v, TaxiBase AS b WHERE d.id = v.driverId AND d.baseId = b.id", Object[].class);
-//		List<Object[]> results = query.getResultList();
-//		for (Object[] result : results) {
-//			if(result[1].toString().contains("test") || result[1].toString().contains("Test") || result[1].toString().contains("TEST") ||
-//					result[2].toString().contains("test") || result[2].toString().contains("Test") || result[2].toString().contains("TEST")||
-//					Integer.parseInt(result[6].toString()) == 0) {
-//				continue;
-//			}
-//			TlcDriver tlcDriver = new TlcDriver(result[0].toString(), result[1].toString(), result[2].toString(), result[3].toString(), result[4].toString(), Integer.parseInt(result[5].toString()), Integer.parseInt(result[6].toString()), Integer.parseInt(result[7].toString()));
-//			tlcDrivers.add(tlcDriver);
-//			tlcDriverMap.put(tlcDriver.getDriverTlcLicenseNum(), tlcDriver);
-//			tlcVehicleMap.put(tlcDriver.getVehicleTlcFhvLicenseNum(), tlcDriver);
-//		}
-//		return results;
 		Query query = entityManager.createQuery("SELECT d FROM Driver d");
 		Collection<Driver> allDrivers =  query.getResultList();
 		for(Driver driver : allDrivers) {
@@ -211,10 +210,10 @@ public class App {
 					driver.getBaseApproved() == 0) {
 				continue;
 			}
-			TlcDriver tlcDriver = new TlcDriver(driver.getDriverTlcFhvLicenseNum(), driver.getFirstName(), driver.getLastName(), taxiVehicle.getVehicleTlcFhvLicenseNum(), String.valueOf(taxiBase.getTlcLicenseNum()), driver.getId(), driver.getBaseApproved(), driver.getStatus());
+			TlcDriver tlcDriver = new TlcDriver(driver, taxiBase, taxiVehicle);
 			tlcDrivers.add(tlcDriver);
-			tlcDriverMap.put(tlcDriver.getDriverTlcLicenseNum(), tlcDriver);
-			tlcVehicleMap.put(tlcDriver.getVehicleTlcFhvLicenseNum(), tlcDriver);
+			tlcDriverMap.put(tlcDriver.getDriver().getDriverTlcFhvLicenseNum(), tlcDriver);
+			tlcVehicleMap.put(tlcDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum(), tlcDriver);
 //			System.out.println(tlcDriver.getFirstname() + " " + tlcDriver.getDriverTlcLicenseNum() + " " + tlcDriver.getVehicleTlcFhvLicenseNum());
 		}
 
