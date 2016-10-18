@@ -13,14 +13,12 @@ public class Email {
 
 
     public static void sendEmail(Map<String, String> contents, String subject, String[] recipients) throws MessagingException {
-        subject = "Driver Verification";
-        String msg ="<table>";
+        String msg ="";
         Iterator iterator = contents.entrySet().iterator();
         while(iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
             msg = msg + pair.getValue();
         }
-        msg += "</table>";
         final String from ="han@cacsnyc.com";
         final  String password ="Mh123456";
 

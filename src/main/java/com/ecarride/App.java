@@ -45,9 +45,9 @@ public class App {
 		checkDriver(streetHailLiveryAPI);
 		checkDriver(fhvVehicleAPI);
 		Map<String, String> adminEmailContent = generateAdminEmailContent(tlcDrivers);
-//		Map<String, String> driverEmailContent = generateDriverEmailContent(tlcDrivers);
 		Email.sendEmail(adminEmailContent, "Driver Verification", ADMIN_RECIPIENTS);
-		generateDriverEmailContent(tlcDrivers);
+		sendEmailToDrivers(tlcDrivers);
+		////////////////////////////////ResetDriverWorkStatus();
 	}
 	public static void ResetDriverWorkStatus() {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
@@ -66,7 +66,7 @@ public class App {
 		}
 	}
 
-	public static void generateDriverEmailContent(Set<TlcDriver> tlcDrivers) throws MessagingException {
+	public static void sendEmailToDrivers(Set<TlcDriver> tlcDrivers) throws MessagingException {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		Map<String, String> result = new LinkedHashMap<>();
 		String driverAlert = "";
@@ -74,23 +74,23 @@ public class App {
 			TlcDriver tlcDriver = iterator.next();
 			if(tlcDriver.isInTrouble()) {
 				inTroubleNum++;
-				driverAlert += "<b>Because your driver or vehicle status has changed, you work has been suspend. <br>" +
+				driverAlert += "<b>Your work has been suspended due to a driver and/or vehicle status change. <br>" +
 						"Please contact your base. <br><br> </b>  Your info: <br>";
 				driverAlert += "Name: " + tlcDriver.getDriver().getFirstName() + " " + tlcDriver.getDriver().getLastName() + " <br>" +
 						"TLC_FHV_License_Number: " + tlcDriver.getDriver().getDriverTlcFhvLicenseNum() + "  <br>" +
 						"TLC_FHV_Vehicle_License_Number: " + tlcDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "<br> <br>";
 				driverAlert += "Reason: <br>";
 				if(!tlcDriver.isActiveInFhvDrivers()) {
-					driverAlert += "You are not a <b> For-Hire Vehicles FHV Active Driver</b> <br>";
+					driverAlert += "You are not a <b> For-Hire Vehicles FHV Active Driver. Please contact your base</b> <br>";
 				}
 				if(!tlcDriver.isActiveInStreetHailLivery()) {
-					driverAlert += "You are not a <b> Street-Hail-Livery Active Driver</b> <br>";
+					driverAlert += "You are not a <b> Street-Hail-Livery Active Driver. Please contact your base</b> <br>";
 				}
 				if(!tlcDriver.isActiveInvehiclesFhv()) {
-					driverAlert += "Your vehicle is not  <b> For-Hire Vehicles FHV Active</b> <br>";
+					driverAlert += "Your vehicle is not  <b> For-Hire Vehicles FHV Active. Please contact your base</b> <br>";
 				}
 				if(tlcDriver.isBaseChanged()) {
-					driverAlert += "You are no longer a driver in our base<br>";
+					driverAlert += "Your record is no longer under our base. Please contact your base<br>";
 				}
 			}
 		}
@@ -102,16 +102,15 @@ public class App {
 	public static Map<String, String> generateAdminEmailContent(Set<TlcDriver> tlcDrivers) {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		Map<String, String> result = new LinkedHashMap<>();
-		String FhvDriverActiveResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br>";
-		String ShlActiveResult = "<b>These drivers are not active in Street-Hail-Livery-Drivers-Active table: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + ")" + "</b> <br>";
-		String FhvVehicleResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br>";
-		String BaseChangedResult = "<b>There drivers are not in base any more: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br>";
+		String FhvDriverActiveResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String ShlActiveResult = "<b>These drivers are not active in Street-Hail-Livery-Drivers-Active table: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + ")" + "</b> <br><table>";
+		String FhvVehicleResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String BaseChangedResult = "<b>Drivers not in base any more: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br><table>";
 		while(iterator.hasNext()) {
 			TlcDriver driver = iterator.next();
 			if(!driver.isActiveInFhvDrivers()) {
-				FhvDriverActiveResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
-
+				FhvDriverActiveResult += "<tr><td><b>Name: </b><span style='padding-left:5px;'>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</span></td><td><b>TLC_FHV_License_Number: </b><span style='padding-left:5px;'>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </span></td><td><b>TLC_FHV_Vehicle_License_Number: </b><span style='padding-left:5px;'>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</span></td></tr>";
 			}
 
 			if(!driver.isActiveInStreetHailLivery()) {
@@ -127,6 +126,12 @@ public class App {
 						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
 			}
 		}
+
+		FhvDriverActiveResult += "</table>";
+		ShlActiveResult += "</table>";
+		FhvVehicleResult += "</table>";
+		BaseChangedResult += "</table>";
+
 		result.put("Admin_FhvDriver", FhvDriverActiveResult);
 		result.put("Admin_Shl", ShlActiveResult);
 		result.put("Admin_FhvVehicle", FhvVehicleResult);
