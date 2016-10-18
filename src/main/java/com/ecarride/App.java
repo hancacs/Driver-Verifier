@@ -77,7 +77,6 @@ public class App {
 			TlcDriver tlcDriver = iterator.next();
 			if(!tlcDriver.isActiveInvehiclesFhv() || !tlcDriver.isActiveInStreetHailLivery() || !tlcDriver.isActiveInFhvDrivers() || tlcDriver.isBaseChanged()) {
 				tlcDriver.setInTrouble(true);
-				String driverEmail = tlcDriver
 //				System.out.println(tlcDriver.getFirstname() + " in trouble? : " + tlcDriver.isInTrouble() + " T1: " + tlcDriver.isActiveInFhvDrivers() + " T2: " + tlcDriver.isActiveInStreetHailLivery() + " T3: " + tlcDriver.isActiveInvehiclesFhv() + " T3-2: " + tlcDriver.isBaseChanged());
 
 			}
