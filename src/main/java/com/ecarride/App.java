@@ -15,38 +15,29 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
 
-import static com.ecarride.App.generateDriverEmailContent;
 
 
-/**
- * Simple standalone JPA app.
- * Will load the user inserted by the script import-users.sql
- * 
- * @author Geoffroy Warin (https://github.com/geowarin)
- *
- */
 public class App {
 
-	public static Set<TlcDriver> tlcDrivers = new HashSet<>();
-	public static Map<String,TlcDriver> tlcDriverMap = new HashMap<>();
-	public static Map<String,TlcDriver> tlcVehicleMap = new HashMap<>();
-	public static String fhvActiveAPI = "https://data.cityofnewyork.us/resource/p8xb-39i5.json";
-	public static String streetHailLiveryAPI = "https://data.cityofnewyork.us/resource/n9g6-5xfa.json";
-	public static String fhvVehicleAPI = "https://data.cityofnewyork.us/resource/k5sk-y8y9.json";
-	public static int fhvDriverActiveNum = 0, fhvShlActiveNum = 0, fhvVehichleActiveNum = 0, baseChangedNum = 0, inTroubleNum = 0;
-	public static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
-	public static EntityManager entityManager = entityManagerFactory.createEntityManager();
-	public static final String[] ADMIN_RECIPIENTS = {"han@cacsnyc.com"};
-	public static  String[] driverRecipients;
+	private static Set<TlcDriver> tlcDrivers = new HashSet<>();
+	private static Map<String,TlcDriver> tlcDriverMap = new HashMap<>();
+	private static Map<String,TlcDriver> tlcVehicleMap = new HashMap<>();
+	private static final String FHV_ACTIVE_API = "https://data.cityofnewyork.us/resource/p8xb-39i5.json";
+	private static final String STREET_HAIL_LIVERY_API = "https://data.cityofnewyork.us/resource/n9g6-5xfa.json";
+	private static final String FHV_VEHICLE_API = "https://data.cityofnewyork.us/resource/k5sk-y8y9.json";
+	private static int fhvDriverActiveNum = 0, fhvShlActiveNum = 0, fhvVehichleActiveNum = 0, baseChangedNum = 0, inTroubleNum = 0;
+	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+	private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+	private static final String[] ADMIN_RECIPIENTS = {"han@cacsnyc.com", "danny@cacsnyc.com", "xunlei@cacsnyc.com"};
 
 	public static void main(String[] args) throws IOException, JSONException, MessagingException {
 		getDrivers();
-		checkDriver(fhvActiveAPI);
-		checkDriver(streetHailLiveryAPI);
-		checkDriver(fhvVehicleAPI);
+		checkDriver(FHV_ACTIVE_API);
+		checkDriver(STREET_HAIL_LIVERY_API);
+		checkDriver(FHV_VEHICLE_API);
 		Map<String, String> adminEmailContent = generateAdminEmailContent(tlcDrivers);
 		Email.sendEmail(adminEmailContent, "Driver Verification", ADMIN_RECIPIENTS);
-		sendEmailToDrivers(tlcDrivers);
+		//sendEmailToDrivers(tlcDrivers);
 		////////////////////////////////ResetDriverWorkStatus();
 	}
 	public static void ResetDriverWorkStatus() {
@@ -94,7 +85,7 @@ public class App {
 				}
 			}
 		}
-		driverRecipients = new String[inTroubleNum];
+		String[] driverRecipients = new String[inTroubleNum];
 		result.put("Driver_Alert", driverAlert);
 		Email.sendEmail(result, "Driver Status Alert",new String[]{"han@cacsnyc.com"});
 	}
