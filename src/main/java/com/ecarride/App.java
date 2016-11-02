@@ -28,7 +28,14 @@ public class App {
 	private static int fhvDriverActiveNum = 0, fhvShlActiveNum = 0, fhvVehichleActiveNum = 0, baseChangedNum = 0, inTroubleNum = 0;
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
 	private static EntityManager entityManager = entityManagerFactory.createEntityManager();
-	private static final String[] ADMIN_RECIPIENTS = {"han@cacsnyc.com", "danny@cacsnyc.com", "xunlei@cacsnyc.com", "kevincacs@gmail.com","rsimcacs@gmail.com"};
+	private static final String[] ADMIN_RECIPIENTS = {
+			"han@cacsnyc.com",
+			"danny@cacsnyc.com",
+			"xunlei@cacsnyc.com",
+			"kevincacs@gmail.com",
+			"rsimcacs@gmail.com",
+			"jingraocacs@gmail.com"
+	};
 
 	public static void main(String[] args) throws IOException, JSONException, MessagingException {
 		getDrivers();
