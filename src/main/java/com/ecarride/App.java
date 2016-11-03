@@ -5,6 +5,12 @@ import javax.persistence.*;
 
 import com.ecarride.model.*;
 
+import com.oracle.tools.packager.Log;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,24 +35,24 @@ public class App {
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
 	private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 	private static final String[] ADMIN_RECIPIENTS = {
-			"han@cacsnyc.com",
-			"danny@cacsnyc.com",
-			"xunlei@cacsnyc.com",
-			"kevincacs@gmail.com",
-			"rsimcacs@gmail.com",
-			"jingraocacs@gmail.com"
+			"han@cacsnyc.com"
 	};
 
 	public static void main(String[] args) throws IOException, JSONException, MessagingException {
 		getDrivers();
-		checkDriver(FHV_ACTIVE_API);
-		checkDriver(STREET_HAIL_LIVERY_API);
-		checkDriver(FHV_VEHICLE_API);
+//		checkDriver(FHV_ACTIVE_API);
+//		checkDriver(STREET_HAIL_LIVERY_API);
+//		checkDriver(FHV_VEHICLE_API);
+		checkDriver();
 		Map<String, String> adminEmailContent = generateAdminEmailContent(tlcDrivers);
 		Email.sendEmail(adminEmailContent, "Driver Verification", ADMIN_RECIPIENTS);
 		//sendEmailToDrivers(tlcDrivers);
 		////////////////////////////////ResetDriverWorkStatus();
 	}
+
+
+
+
 	public static void ResetDriverWorkStatus() {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		while(iterator.hasNext()) {
@@ -101,27 +107,27 @@ public class App {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		Map<String, String> result = new LinkedHashMap<>();
 		String FhvDriverActiveResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String ShlActiveResult = "<b>These drivers are not active in Street-Hail-Livery-Drivers-Active table: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + ")" + "</b> <br><table>";
+		String ShlActiveResult = "<b>These drivers are not active in Street-Hail-Livery-Drivers-Active table: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
 		String FhvVehicleResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
 		String BaseChangedResult = "<b>Drivers not in base any more: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br><table>";
 		while(iterator.hasNext()) {
 			TlcDriver driver = iterator.next();
 			if(!driver.isActiveInFhvDrivers()) {
-				FhvDriverActiveResult += "<tr><td><b>Name: </b><span style='padding-left:5px;'>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</span></td><td><b>TLC_FHV_License_Number: </b><span style='padding-left:5px;'>" +
+				FhvDriverActiveResult += "<tr><td><b>Name: </b><span style='padding-left:5px;'>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</span></td><td><b>TLC_FHV_License_Number: </b><span style='padding-left:5px;color:red;'>" +
 						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </span></td><td><b>TLC_FHV_Vehicle_License_Number: </b><span style='padding-left:5px;'>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</span></td></tr>";
 			}
 
 			if(!driver.isActiveInStreetHailLivery()) {
-				ShlActiveResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				ShlActiveResult += "<tr><td><b>Name: </b><span style='padding-left:5px;'>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</span></td><td><b>TLC_FHV_License_Number: </b><span style='padding-left:5px;color:red;'>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </span></td><td><b>TLC_FHV_Vehicle_License_Number: </b><span style='padding-left:5px;'>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</span></td></tr>";
 			}
 			if(!driver.isActiveInvehiclesFhv()) {
-				FhvVehicleResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				FhvVehicleResult += "<tr><td><b>Name: </b><span style='padding-left:5px;'>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</span></td><td><b>TLC_FHV_License_Number: </b><span style='padding-left:5px;'>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </span></td><td><b>TLC_FHV_Vehicle_License_Number: </b><span style='padding-left:5px;color:red;'>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</span></td></tr>";
 			}
 			if(driver.isBaseChanged()) {
-				BaseChangedResult += "<tr><td><b>Name: </b>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</td><td><b>TLC_FHV_License_Number: </b>" +
-						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </td><td><b>TLC_FHV_Vehicle_License_Number: </b>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</td></tr>";
+				BaseChangedResult += "<tr><td><b>Name: </b><span style='padding-left:5px;'>" + driver.getDriver().getFirstName() + " " + driver.getDriver().getLastName() + "</span></td><td><b>TLC_FHV_License_Number: </b><span style='padding-left:5px;'>" +
+						driver.getDriver().getDriverTlcFhvLicenseNum() + "  </span></td><td><b>TLC_FHV_Vehicle_License_Number: </b><span style='padding-left:5px; color:red;'>" + driver.getTaxiVehicle().getVehicleTlcFhvLicenseNum() + "</span></td></tr>";
 			}
 		}
 
@@ -138,58 +144,107 @@ public class App {
 		return result;
 	}
 
-	public static void checkDriver(String url) throws JSONException {
-		String json = loadJson(url);
-		String licenseNumber = "", vehicleLicenseNumber = "";
-		JSONArray array = new JSONArray(json);
-		for(int i=0; i<array.length(); i++){
-			JSONObject jsonObj  = array.getJSONObject(i);
+//	public static void checkDriver(String url) throws JSONException {
+//		String json = loadJson(url);
+//		System.out.println(url);
+//		String licenseNumber = "", vehicleLicenseNumber = "";
+//		JSONArray array = new JSONArray(json);
+//		System.out.println(array.length());
+//		for(int i=0; i<array.length(); i++){
+//			JSONObject jsonObj  = array.getJSONObject(i);
+//			if(url.equals("https://data.cityofnewyork.us/resource/k5sk-y8y9.json")) {
+//				vehicleLicenseNumber = jsonObj.getString("vehicle_license_number").trim();
+//				if(!tlcVehicleMap.containsKey(vehicleLicenseNumber))
+//					continue;
+//				TlcDriver tempDriver = tlcVehicleMap.get(vehicleLicenseNumber);
+//				System.out.println("333333 " + tempDriver.getDriver().getFirstName() + "  " + tempDriver.getDriver().getDriverTlcFhvLicenseNum() + "   " + tempDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+//				if(jsonObj.getString("active").toLowerCase().equals("yes")) {
+//					tempDriver.setActiveInvehiclesFhv(true);
+//					fhvVehichleActiveNum++;
+//				}
+//				if(!jsonObj.getString("base_number").substring(jsonObj.getString("base_number").length() - 4).equals(String.valueOf(tempDriver.getTaxiBase().getTlcLicenseNum()))) {
+//					tempDriver.setBaseChanged(true);
+//					baseChangedNum++;
+//				}
+//			}
+//			else {
+//				licenseNumber = jsonObj.getString("license_number").trim();
+////				if (licenseNumber.equals("5643885")) {
+////					System.out.println("\n\n\n\n\n\n  hahahahahahahaah \n\n\n\n\n\n");
+////				}
+//				if(!tlcDriverMap.containsKey(licenseNumber))
+//					continue;
+////				if (licenseNumber.equals("5643885")) {
+////					System.out.println(licenseNumber +"\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n       " + tlcDriverMap.get("5643885").getDriver().getFirstName());
+////				}
+//				TlcDriver tempDriver = tlcDriverMap.get(licenseNumber);
+//				switch (url) {
+//					case "https://data.cityofnewyork.us/resource/p8xb-39i5.json" :
+//						System.out.println("111111 " + tempDriver.getDriver().getFirstName() + "  " + tempDriver.getDriver().getDriverTlcFhvLicenseNum() + "   " + tempDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+//						tempDriver.setActiveInFhvDrivers(true);
+//						fhvDriverActiveNum++;
+//						break;
+//					case "https://data.cityofnewyork.us/resource/n9g6-5xfa.json" :
+//						System.out.println("222222 " + tempDriver.getDriver().getFirstName() + "  " + tempDriver.getDriver().getDriverTlcFhvLicenseNum() + "   " + tempDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+//						tempDriver.setActiveInStreetHailLivery(true);
+//						fhvShlActiveNum++;
+//						break;
+//				}
+//			}
+//
+//		}
+//
+//	}
 
-			if(url.equals("https://data.cityofnewyork.us/resource/k5sk-y8y9.json")) {
-				vehicleLicenseNumber = jsonObj.getString("vehicle_license_number").trim();
-				if(!tlcVehicleMap.containsKey(vehicleLicenseNumber))
-					continue;
-				TlcDriver tempDriver = tlcVehicleMap.get(vehicleLicenseNumber);
-				if(jsonObj.getString("active").toLowerCase().equals("yes")) {
-					tempDriver.setActiveInvehiclesFhv(true);
-					fhvVehichleActiveNum++;
-				}
-				if(!jsonObj.getString("base_number").substring(jsonObj.getString("base_number").length() - 4).equals(String.valueOf(tempDriver.getTaxiBase().getTlcLicenseNum()))) {
-					tempDriver.setBaseChanged(true);
-					baseChangedNum++;
-				}
+
+
+
+	public static void checkDriver() throws JSONException {
+
+		for (TlcDriver thisDriver : tlcDrivers) {
+//			String url = "https://data.cityofnewyork.us/resource/k5sk-y8y9.json?vehicle_license_number=5675001";
+			JSONArray jsonDriverArray = loadJson(FHV_ACTIVE_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
+			JSONArray jsonSHLArray = loadJson(STREET_HAIL_LIVERY_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
+			JSONArray jsonVehicleArray = loadJson(FHV_VEHICLE_API + "?vehicle_license_number=" + thisDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+			// check driver
+			if (jsonDriverArray.length() != 0) {
+				thisDriver.setActiveInFhvDrivers(true);
+				fhvDriverActiveNum++;
 			}
-			else {
-				licenseNumber = jsonObj.getString("license_number").trim();
-				if(!tlcDriverMap.containsKey(licenseNumber))
-					continue;
-				TlcDriver tempDriver = tlcDriverMap.get(licenseNumber);
-				switch (url) {
-					case "https://data.cityofnewyork.us/resource/p8xb-39i5.json" :
-						tempDriver.setActiveInFhvDrivers(true);
-						fhvDriverActiveNum++;
-						break;
-					case "https://data.cityofnewyork.us/resource/n9g6-5xfa.json" :
-						tempDriver.setActiveInStreetHailLivery(true);
-						fhvShlActiveNum++;
-						break;
+			// check SHL
+			if (jsonSHLArray.length() != 0) {
+				thisDriver.setActiveInStreetHailLivery(true);
+				fhvShlActiveNum++;
+			}
+			//check vehicle
+			if (jsonVehicleArray.length() != 0 && jsonVehicleArray.getJSONObject(0).getString("active").trim().toLowerCase().equals("yes")) {
+				thisDriver.setActiveInvehiclesFhv(true);
+				fhvVehichleActiveNum++;
+			}
+			//check base change
+			if (jsonVehicleArray.length() != 0) {
+				JSONObject thisJSON = jsonVehicleArray.getJSONObject(0);
+				String baseNumberInJSON = thisJSON.getString("base_number").trim();
+				if (!baseNumberInJSON.substring(baseNumberInJSON.length() - 4).equals(String.valueOf(thisDriver.getTaxiBase().getTlcLicenseNum()))) {
+					thisDriver.setBaseChanged(true);
+					baseChangedNum++;
 				}
 			}
 
 		}
-
 	}
-
-	public static String loadJson (String url) {
+	public static JSONArray loadJson (String url) throws JSONException {
 		StringBuilder json = new StringBuilder();
 		try {
 			URL urlObject = new URL(url);
 			URLConnection uc = urlObject.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(),"utf-8"));
 			String inputLine = null;
+//			int count = 0;
 			while ( (inputLine = in.readLine()) != null ) {
 				json.append(inputLine);
-//				System.out.println(inputLine);
+				/*if (count++ <= 2)
+					System.out.println(inputLine);*/
 			}
 			in.close();
 		} catch (MalformedURLException e) {
@@ -197,7 +252,7 @@ public class App {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return json.toString();
+		return new JSONArray(json.toString());
 	}
 
 	public static void getDrivers() {
@@ -217,7 +272,7 @@ public class App {
 			tlcDrivers.add(tlcDriver);
 			tlcDriverMap.put(tlcDriver.getDriver().getDriverTlcFhvLicenseNum(), tlcDriver);
 			tlcVehicleMap.put(tlcDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum(), tlcDriver);
-//			System.out.println(tlcDriver.getFirstname() + " " + tlcDriver.getDriverTlcLicenseNum() + " " + tlcDriver.getVehicleTlcFhvLicenseNum());
+//			System.out.println(tlcDriver.getDriver().getFirstName() + " " + tlcDriver.getDriver().getDriverTlcFhvLicenseNum() + " " + tlcDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
 		}
 
 	}

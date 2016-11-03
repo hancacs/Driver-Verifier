@@ -33,18 +33,23 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-              <folding />
+            <state relative-caret-position="1080">
+              <caret line="125" column="171" selection-start-line="125" selection-start-column="171" selection-end-line="125" selection-end-column="171" />
+              <folding>
+                <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+                <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+                <element signature="method#loadJson#0;class#App#0" expanded="false" />
+                <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="TlcDriver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/TlcDriver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="14" column="30" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -119,6 +124,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -232,7 +238,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -723,12 +728,14 @@
       <workItem from="1477601139133" duration="221000" />
       <workItem from="1477601437172" duration="5000" />
       <workItem from="1477675010341" duration="1750000" />
-      <workItem from="1478119586794" duration="624000" />
+      <workItem from="1478119586794" duration="759000" />
+      <workItem from="1478178109362" duration="79000" />
+      <workItem from="1478178192262" duration="10322000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5955000" />
+    <option name="totallyTimeSpent" value="16491000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -736,12 +743,12 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3051095" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3051095" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -785,7 +792,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -801,7 +826,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -825,7 +876,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -849,7 +905,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -865,7 +926,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -881,7 +947,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -909,14 +980,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Driver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -925,11 +988,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Driver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/TlcDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="1080">
+          <caret line="125" column="171" selection-start-line="125" selection-start-column="171" selection-end-line="125" selection-end-column="171" />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
