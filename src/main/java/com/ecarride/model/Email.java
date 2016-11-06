@@ -19,8 +19,8 @@ public class Email {
             Map.Entry pair = (Map.Entry) iterator.next();
             msg = msg + pair.getValue();
         }
-        final String from ="operrtechnologies@gmail.com";
-        final  String password ="nf3B()td#@s2";
+        final String from = Credentials.EMAIL_FROM;
+        final  String password = Credentials.PASSWORD;
 
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");

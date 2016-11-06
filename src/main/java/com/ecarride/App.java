@@ -20,11 +20,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
-
+import java.util.logging.Logger;
 
 
 public class App {
-
 	private static Set<TlcDriver> tlcDrivers = new HashSet<>();
 	private static Map<String,TlcDriver> tlcDriverMap = new HashMap<>();
 	private static Map<String,TlcDriver> tlcVehicleMap = new HashMap<>();
@@ -35,7 +34,12 @@ public class App {
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
 	private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 	private static final String[] ADMIN_RECIPIENTS = {
-			"han@cacsnyc.com"
+			"han@cacsnyc.com",
+			"danny@cacsnyc.com",
+			"xunlei@cacsnyc.com",
+			"kevincacs@gmail.com",
+			"rsimcacs@gmail.com",
+			"jingraocacs@gmail.com"
 	};
 
 	public static void main(String[] args) throws IOException, JSONException, MessagingException {
