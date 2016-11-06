@@ -19,6 +19,7 @@ public class Email {
             Map.Entry pair = (Map.Entry) iterator.next();
             msg = msg + pair.getValue();
         }
+
         final String from = Credentials.EMAIL_FROM;
         final  String password = Credentials.PASSWORD;
 
