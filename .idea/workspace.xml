@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c5376e9-3e7d-4abb-bd99-03e807c577c7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DriverVerifier.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
+              <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -741,12 +741,12 @@
       <workItem from="1478208312736" duration="17000" />
       <workItem from="1478208333491" duration="2000" />
       <workItem from="1478467241060" duration="1291000" />
-      <workItem from="1478529033643" duration="694000" />
+      <workItem from="1478529033643" duration="886000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19542000" />
+    <option name="totallyTimeSpent" value="19734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -1141,7 +1141,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
+          <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
           <folding />
         </state>
       </provider>
