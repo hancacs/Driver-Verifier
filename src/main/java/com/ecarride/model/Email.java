@@ -24,7 +24,6 @@ public class Email {
         final  String password = Credentials.PASSWORD;
 
 
-        
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
         props.setProperty("mail.host", "smtp.gmail.com");
