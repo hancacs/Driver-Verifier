@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4c5376e9-3e7d-4abb-bd99-03e807c577c7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" />
     </list>
     <ignored path="DriverVerifier.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,11 +40,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Credentials.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TlcDriver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/TlcDriver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="936">
+              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+              <folding>
+                <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+                <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+                <element signature="e#8032#8100#0" expanded="false" />
+                <element signature="method#loadJson#0;class#App#0" expanded="false" />
+                <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Credentials.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+            <state relative-caret-position="162">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,9 +97,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
-        <option value="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" />
       </list>
     </option>
   </component>
@@ -741,12 +768,12 @@
       <workItem from="1478208312736" duration="17000" />
       <workItem from="1478208333491" duration="2000" />
       <workItem from="1478467241060" duration="1291000" />
-      <workItem from="1478529033643" duration="886000" />
+      <workItem from="1478529033643" duration="1340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19734000" />
+    <option name="totallyTimeSpent" value="20188000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -806,7 +833,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -835,7 +862,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -864,7 +891,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -893,7 +920,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -907,7 +934,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -929,7 +956,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -951,7 +978,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -981,7 +1008,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -1011,7 +1038,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -1033,7 +1060,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -1055,7 +1082,7 @@
           <folding>
             <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
             <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
             <element signature="method#loadJson#0;class#App#0" expanded="false" />
             <element signature="method#getDrivers#0;class#App#0" expanded="false" />
           </folding>
@@ -1093,20 +1120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
-            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
-            <element signature="e#8029#8097#0" expanded="false" />
-            <element signature="method#loadJson#0;class#App#0" expanded="false" />
-            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -1114,18 +1127,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/TlcDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1138,11 +1151,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/TlcDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+        <state relative-caret-position="936">
+          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+          <folding>
+            <element signature="method#ResetDriverWorkStatus#0;class#App#0" expanded="false" />
+            <element signature="method#sendEmailToDrivers#0;class#App#0" expanded="false" />
+            <element signature="e#8032#8100#0" expanded="false" />
+            <element signature="method#loadJson#0;class#App#0" expanded="false" />
+            <element signature="method#getDrivers#0;class#App#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

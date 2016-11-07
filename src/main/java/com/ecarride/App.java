@@ -51,6 +51,7 @@ public class App {
 		Map<String, String> adminEmailContent = generateAdminEmailContent(tlcDrivers);
 		Email.sendEmail(adminEmailContent, "Driver Verification", ADMIN_RECIPIENTS);
 		//sendEmailToDrivers(tlcDrivers);
+		
 		////////////////////////////////ResetDriverWorkStatus();
 	}
 
