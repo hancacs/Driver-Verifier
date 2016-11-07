@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c5376e9-3e7d-4abb-bd99-03e807c577c7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" />
     </list>
     <ignored path="DriverVerifier.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +32,8 @@
       <file leaf-file-name="Email.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -96,9 +95,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
-        <option value="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ecarride/model/Credentials.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ecarride/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java" />
       </list>
     </option>
   </component>
@@ -768,16 +767,16 @@
       <workItem from="1478208333491" duration="2000" />
       <workItem from="1478467241060" duration="1291000" />
       <workItem from="1478529033643" duration="1494000" />
-      <workItem from="1478536155535" duration="93000" />
+      <workItem from="1478536155535" duration="165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20435000" />
+    <option name="totallyTimeSpent" value="20507000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1192,8 +1191,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ecarride/model/Email.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
