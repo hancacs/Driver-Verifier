@@ -16,10 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 
@@ -34,17 +36,16 @@ public class App {
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
 	private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 	private static final String[] ADMIN_RECIPIENTS = Credentials.ADMIN_RECIPIENTS;
-
-	public static void main(String[] args) throws IOException, JSONException, MessagingException {
+//	private static final String[] ADMIN_RECIPIENTS = {
+//		"han@cacsnyc.com"
+//	};
+	public static void main(String[] args) throws IOException, JSONException, MessagingException, InterruptedException {
 		getDrivers();
-//		checkDriver(FHV_ACTIVE_API);
-//		checkDriver(STREET_HAIL_LIVERY_API);
-//		checkDriver(FHV_VEHICLE_API);
 		checkDriver();
 		Map<String, String> adminEmailContent = generateAdminEmailContent(tlcDrivers);
 		Email.sendEmail(adminEmailContent, "Driver Verification", ADMIN_RECIPIENTS);
-		//sendEmailToDrivers(tlcDrivers);
 
+		//sendEmailToDrivers(tlcDrivers);
 		////////////////////////////////ResetDriverWorkStatus();
 	}
 
@@ -104,10 +105,10 @@ public class App {
 	public static Map<String, String> generateAdminEmailContent(Set<TlcDriver> tlcDrivers) {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		Map<String, String> result = new LinkedHashMap<>();
-		String FhvDriverActiveResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String ShlActiveResult = "<b>These drivers are not active in Street-Hail-Livery-Drivers-Active table: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String FhvVehicleResult = "<b>These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String BaseChangedResult = "<b>Drivers not in base any more: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br><table>";
+		String FhvDriverActiveResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-Drivers/xjfq-wh2d\">These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table</a>: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String ShlActiveResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/Street-Hail-Livery-Drivers-Active/5tub-eh45\">These drivers are not active in Street-Hail-Livery-Drivers-Active table</a>: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String FhvVehicleResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles/8wbx-tsch\">These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles table</a>: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String BaseChangedResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles/8wbx-tsch\">These drivers are not affiliated to our base</a>: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br><table>";
 		while(iterator.hasNext()) {
 			TlcDriver driver = iterator.next();
 			if(!driver.isActiveInFhvDrivers()) {
@@ -197,13 +198,35 @@ public class App {
 
 
 
-	public static void checkDriver() throws JSONException {
+	public static void checkDriver() throws JSONException, InterruptedException {
 
 		for (TlcDriver thisDriver : tlcDrivers) {
 //			String url = "https://data.cityofnewyork.us/resource/k5sk-y8y9.json?vehicle_license_number=5675001";
-			JSONArray jsonDriverArray = loadJson(FHV_ACTIVE_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
-			JSONArray jsonSHLArray = loadJson(STREET_HAIL_LIVERY_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
-			JSONArray jsonVehicleArray = loadJson(FHV_VEHICLE_API + "?vehicle_license_number=" + thisDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+
+			JSONArray jsonDriverArray = null;
+			JSONArray jsonSHLArray = null;
+			JSONArray jsonVehicleArray = null;
+
+			jsonDriverArray = loadJson(FHV_ACTIVE_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
+			jsonSHLArray = loadJson(STREET_HAIL_LIVERY_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
+			jsonVehicleArray = loadJson(FHV_VEHICLE_API + "?vehicle_license_number=" + thisDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+
+			if (jsonDriverArray == null) {
+				TimeUnit.SECONDS.sleep(1);
+				jsonDriverArray = loadJson(FHV_ACTIVE_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
+			}
+
+			if (jsonSHLArray == null) {
+				TimeUnit.SECONDS.sleep(1);
+				jsonSHLArray = loadJson(STREET_HAIL_LIVERY_API + "?license_number=" + thisDriver.getDriver().getDriverTlcFhvLicenseNum());
+			}
+
+			if (jsonVehicleArray == null) {
+				TimeUnit.SECONDS.sleep(1);
+				jsonVehicleArray = loadJson(FHV_VEHICLE_API + "?vehicle_license_number=" + thisDriver.getTaxiVehicle().getVehicleTlcFhvLicenseNum());
+			}
+
+
 			// check driver
 			if (jsonDriverArray.length() != 0) {
 				thisDriver.setActiveInFhvDrivers(true);
@@ -237,6 +260,7 @@ public class App {
 			URL urlObject = new URL(url);
 			URLConnection uc = urlObject.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(),"utf-8"));
+
 			String inputLine = null;
 //			int count = 0;
 			while ( (inputLine = in.readLine()) != null ) {
