@@ -105,10 +105,10 @@ public class App {
 	public static Map<String, String> generateAdminEmailContent(Set<TlcDriver> tlcDrivers) {
 		Iterator<TlcDriver> iterator = tlcDrivers.iterator();
 		Map<String, String> result = new LinkedHashMap<>();
-		String FhvDriverActiveResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-Drivers/xjfq-wh2d\">These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table</a>: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String ShlActiveResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/Street-Hail-Livery-Drivers-Active/5tub-eh45\">These drivers are not active in Street-Hail-Livery-Drivers-Active table</a>: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String FhvVehicleResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles/8wbx-tsch\">These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles table</a>: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
-		String BaseChangedResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles/8wbx-tsch\">These drivers are not affiliated to our base</a>: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br><table>";
+		String FhvDriverActiveResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-Drivers/xjfq-wh2d/data\">These drivers are not active in For-Hire-Vehicles-FHV-Active-Drivers table</a>: " + "(" + (tlcDrivers.size() - fhvDriverActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String ShlActiveResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/Street-Hail-Livery-Drivers-Active/5tub-eh45/data\">These drivers are not active in Street-Hail-Livery-Drivers-Active table</a>: " + "(" +(tlcDrivers.size() - fhvShlActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String FhvVehicleResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles/8wbx-tsch/data\">These drivers are not active in For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles table</a>: " + "(" +(tlcDrivers.size() - fhvVehichleActiveNum) + "/" + tlcDrivers.size() + ")" + "</b> <br><table>";
+		String BaseChangedResult = "<b><a href=\"https://data.cityofnewyork.us/Transportation/For-Hire-Vehicles-FHV-Active-and-Inactive-Vehicles/8wbx-tsch/data\">These drivers are not affiliated to our base</a>: " + "(" +baseChangedNum +  "/" + tlcDrivers.size() + ")" + "<b></br><table>";
 		while(iterator.hasNext()) {
 			TlcDriver driver = iterator.next();
 			if(!driver.isActiveInFhvDrivers()) {
